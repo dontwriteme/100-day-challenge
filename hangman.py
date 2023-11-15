@@ -57,35 +57,37 @@ stages = ['''
         |
 ========== ''']
 
-word_list = ['breast', 'chin', 'shoulder']
-chosen_word = random.choice(word_list)
-
+word_list = ['finger', 'back', 'knee']
 display = []
-for i in chosen_word:
+
+select_word = random.choice(word_list)
+end_of_game = False
+lives = 6
+
+for i in select_word:
     display += '_'
 print(display)
 
-end_of_game = 0
-lives = 6
+while not end_of_game:
 
-while end_of_game == 0:
-    selected_letter = input('Select a letter: ').lower()
+    select_letter = input('Enter letter: ').lower()
 
-    for i in range(len(chosen_word)):
-        index_letter = chosen_word[i]
-
-        if index_letter == selected_letter:
+    for i in range(len(select_word)):
+        index_letter = select_word[i]
+        if index_letter == select_letter:
             display[i] = index_letter
-    print(display)
 
-    if selected_letter not in chosen_word:
+    if select_letter not in select_word:
         lives -= 1
+        print(f'You have lost one life. Your lives: {lives}')
         if lives == 0:
-            end_of_game = 1
-        print(f'Lose one live! You have {lives} lives')
+            end_of_game = True
+            print('You lose')
+
+    print(f"{' '.join(display)}")
 
     if '_' not in display:
-        end_game = 1
-        print('You win!')
+        end_of_game = True
+        print('You win')
 
     print(stages[lives])
